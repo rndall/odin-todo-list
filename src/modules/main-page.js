@@ -1,5 +1,9 @@
 function createMainPage({ name, todos }) {
 	const main = document.createElement("div");
+	main.classList.add("container");
+
+	const mainHeader = document.createElement("div");
+	mainHeader.classList.add("header");
 
 	const titleEl = document.createElement("h2");
 	titleEl.textContent = name;
@@ -7,6 +11,16 @@ function createMainPage({ name, todos }) {
 	const taskCount = todos.length;
 	const taskCountEl = document.createElement("p");
 	taskCountEl.textContent = `${taskCount} ${taskCount === 1 ? "task" : "tasks"}`;
+
+	const headerText = document.createElement("div");
+	headerText.append(titleEl, taskCountEl);
+
+	const addTodoBtn = document.createElement("button");
+	addTodoBtn.classList.add("button");
+	addTodoBtn.textContent = "+";
+	addTodoBtn.id = "add-btn";
+
+	mainHeader.append(document.createElement("div"), headerText, addTodoBtn);
 
 	const todosDiv = document.createElement("div");
 	todosDiv.classList.add("todos");
@@ -46,7 +60,7 @@ function createMainPage({ name, todos }) {
 		todosDiv.appendChild(todoDiv);
 	}
 
-	main.append(titleEl, taskCountEl, todosDiv);
+	main.append(mainHeader, todosDiv);
 
 	return main;
 }
