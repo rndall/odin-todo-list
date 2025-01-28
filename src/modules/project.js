@@ -1,8 +1,11 @@
-function createProject(name, todos = []) {
-	const addTodo = (todo) => todos.push(todo);
-	const removeTodo = (index) => todos.filter((todo, i) => index !== todo[i]);
+import { createTodo } from "./todo";
 
-	return { name, addTodo, removeTodo };
+function createProject(name, todos = []) {
+	const addTodo = (title, description, dueDate, priority) =>
+		todos.push(createTodo(title, description, dueDate, priority));
+	const removeTodo = (index) => todos.splice(index, 1);
+
+	return { name, todos, addTodo, removeTodo };
 }
 
 export { createProject };
