@@ -1,5 +1,4 @@
 import { createProject } from "./project";
-import { createTodo } from "./todo";
 
 const projects = [];
 const getProjects = () => projects;
