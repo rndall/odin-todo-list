@@ -7,21 +7,31 @@
   </head>
 
   <body>
+    <dialog class="dialog" id="new-project">
+      <div class="header">
+        <h3>New Project</h3>
+        <button class="button" id="project-close">x</button>
+      </div>
+      <form class="form" id="project-form">
+        <label class="form__label"
+          >Project Name
+          <input class="form__input" type="text" id="project_name" required
+        /></label>
+
+        <button class="button form__button">Create</button>
+      </form>
+    </dialog>
+
     <aside class="section">
       <h1>Todo List</h1>
 
       <div>
         <div class="header">
           <h2>Projects</h2>
-          <button class="button">+</button>
+          <button class="button" id="new-project-btn">+</button>
         </div>
 
-        <nav class="nav">
-          <ul>
-            <li><button class="nav__button button">Default</button></li>
-            <li><button class="nav__button button">Test</button></li>
-          </ul>
-        </nav>
+        <nav class="nav"></nav>
       </div>
     </aside>
 
