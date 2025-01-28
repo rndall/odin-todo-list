@@ -5,6 +5,31 @@ body {
 	min-height: 100dvh;
 }
 
+.dialog {
+	border-radius: .75rem;
+	place-self: center;
+}
+
+.dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form {
+	display: grid;
+	justify-items: start;
+	gap: 12px;
+	margin-top: 16px;
+}
+
+.form__label {
+	text-transform: uppercase;
+	letter-spacing: .05em;
+}
+
+.form__input {
+	display: block;
+}
+
 .section {
 	padding: 16px;
 }
