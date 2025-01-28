@@ -10,4 +10,4 @@ const addProject = (name, todos) => {
 
 addProject("Default");
 
-export { getProjects };
+export { getProjects, addProject };
