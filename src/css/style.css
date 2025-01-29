@@ -64,8 +64,15 @@ main {
 
 .header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.header__button {
+	position: absolute;
+	right: 0;
 }
 
 .todos {

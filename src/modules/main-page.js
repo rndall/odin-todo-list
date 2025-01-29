@@ -16,11 +16,15 @@ function createMainPage({ name, todos }) {
 	headerText.append(titleEl, taskCountEl);
 
 	const addTodoBtn = document.createElement("button");
-	addTodoBtn.classList.add("button");
+	addTodoBtn.classList.add("button", "header__button");
 	addTodoBtn.textContent = "+";
 	addTodoBtn.id = "add-btn";
 
-	mainHeader.append(document.createElement("div"), headerText, addTodoBtn);
+	mainHeader.append(headerText, addTodoBtn);
+
+	const deleteProjectBtn = document.createElement("button");
+	deleteProjectBtn.classList.add("button");
+	deleteProjectBtn.textContent = "Delete Project";
 
 	const todosDiv = document.createElement("div");
 	todosDiv.classList.add("todos");
@@ -60,7 +64,7 @@ function createMainPage({ name, todos }) {
 		todosDiv.appendChild(todoDiv);
 	}
 
-	main.append(mainHeader, todosDiv);
+	main.append(mainHeader, deleteProjectBtn, todosDiv);
 
 	return main;
 }
