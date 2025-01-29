@@ -1,3 +1,5 @@
+import { getProjects } from "./todo-list";
+
 function createMainPage({ name, todos }) {
 	const main = document.createElement("div");
 	main.classList.add("container");
@@ -6,6 +8,7 @@ function createMainPage({ name, todos }) {
 	mainHeader.classList.add("header");
 
 	const titleEl = document.createElement("h2");
+	titleEl.id = "project-name";
 	titleEl.textContent = name;
 
 	const taskCount = todos.length;
@@ -25,6 +28,7 @@ function createMainPage({ name, todos }) {
 	const deleteProjectBtn = document.createElement("button");
 	deleteProjectBtn.classList.add("button");
 	deleteProjectBtn.textContent = "Delete Project";
+	deleteProjectBtn.id = "delete-project";
 
 	const todosDiv = document.createElement("div");
 	todosDiv.classList.add("todos");
@@ -69,4 +73,20 @@ function createMainPage({ name, todos }) {
 	return main;
 }
 
-export { createMainPage };
+function loadMainPage(tab) {
+	const projects = getProjects();
+	const mainDiv = document.querySelector("#main");
+	mainDiv.textContent = "";
+
+	if (!tab) {
+		mainDiv.appendChild(createMainPage(projects[0]));
+	}
+
+	for (const proj of projects) {
+		if (tab === proj.name) {
+			mainDiv.appendChild(createMainPage(proj));
+		}
+	}
+}
+
+export { loadMainPage };

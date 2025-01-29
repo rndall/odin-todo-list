@@ -1,12 +1,15 @@
-function createSidebarNav(projects) {
+import { getProjects } from "./todo-list";
+
+function createSidebarNav() {
+	const projects = getProjects();
 	const ul = document.createElement("ul");
 
-	for (const proj of projects) {
+	for (const { name } of projects) {
 		const li = document.createElement("li");
 
 		const button = document.createElement("button");
 		button.classList.add("button", "nav__button");
-		button.textContent = proj.name;
+		button.textContent = name;
 
 		li.appendChild(button);
 		ul.appendChild(li);
@@ -15,4 +18,10 @@ function createSidebarNav(projects) {
 	return ul;
 }
 
-export { createSidebarNav };
+function loadSidebarNav() {
+	const nav = document.querySelector(".nav");
+	nav.textContent = "";
+	nav.appendChild(createSidebarNav());
+}
+
+export { loadSidebarNav };
