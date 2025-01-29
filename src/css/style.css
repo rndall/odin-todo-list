@@ -5,6 +5,15 @@ body {
 	min-height: 100dvh;
 }
 
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
 .dialog {
 	border-radius: .75rem;
 	place-self: center;
