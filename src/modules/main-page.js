@@ -1,4 +1,3 @@
-import { pl } from "date-fns/locale";
 import { deleteProject, getProjects } from "./todo-list";
 
 function createMainPage({ name, todos }, index) {
@@ -23,6 +22,7 @@ function createMainPage({ name, todos }, index) {
 	addTodoBtn.classList.add("button", "header__button");
 	addTodoBtn.textContent = "+";
 	addTodoBtn.id = "add-btn";
+	addTodoBtn.dataset.project = index;
 
 	mainHeader.append(headerText, addTodoBtn);
 

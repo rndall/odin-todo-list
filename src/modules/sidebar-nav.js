@@ -2,7 +2,6 @@ import { getProjects } from "./todo-list";
 
 function createSidebarNav() {
 	const projects = getProjects();
-	console.log(projects);
 	const ul = document.createElement("ul");
 
 	for (const [i, { name }] of projects.entries()) {

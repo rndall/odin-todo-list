@@ -35,8 +35,13 @@ body {
 	letter-spacing: .05em;
 }
 
-.form__input {
+.form__input,
+.form__select {
 	display: block;
+}
+
+.form__button {
+	margin-top: 12px;
 }
 
 .section {
@@ -97,6 +102,10 @@ main {
 	padding: 16px;
 	width: 500px;
 	display: flex;
-	justify-content: space-between;
+	gap: 10px;
 	align-items: center;
+}
+
+.todo__title {
+	margin-right: auto;
 }

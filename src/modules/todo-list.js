@@ -10,6 +10,12 @@ const addProject = (name, todos) => {
 
 const deleteProject = (index) => projects.splice(index, 1);
 
-addProject("Default");
+const getProject = (index) => projects[index];
 
-export { getProjects, addProject, deleteProject };
+addProject("Default");
+addProject("test");
+projects[0].addTodo("rsrsrarsars", "", "2025-01-23");
+projects[1].addTodo("Test2", "desc", "2025-01-23");
+projects[1].addTodo("Tst2", "desc", "2025-01-23");
+
+export { getProjects, addProject, deleteProject, getProject };
