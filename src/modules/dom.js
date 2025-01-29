@@ -1,16 +1,16 @@
 import { loadMainPage } from "./main-page";
 import { loadSidebarNav } from "./sidebar-nav";
-import { addProject, deleteProject } from "./todo-list";
+import { addProject, deleteProject, getProjects } from "./todo-list";
 
 function updateScreen() {
 	loadSidebarNav();
-	loadMainPage("Default");
+	loadMainPage();
 
 	const nav = document.querySelector(".nav");
 	nav.addEventListener("click", (e) => {
 		if (e.target.matches(".nav__button")) {
-			const btnText = e.target.textContent;
-			loadMainPage(btnText);
+			const index = +e.target.dataset.project;
+			loadMainPage(index);
 		}
 	});
 
@@ -28,7 +28,7 @@ function updateScreen() {
 			newProjectInput.value = "";
 			newProjectDialog.close();
 			loadSidebarNav();
-			loadMainPage(inputVal);
+			loadMainPage(getProjects().length - 1);
 		}
 	});
 	newProjectBtn.addEventListener("click", () => newProjectDialog.showModal());
@@ -37,8 +37,7 @@ function updateScreen() {
 	const main = document.querySelector("#main");
 	main.addEventListener("click", (e) => {
 		if (e.target.matches("#delete-project")) {
-			const projectName = document.querySelector("#project-name");
-			deleteProject(projectName.textContent);
+			deleteProject(e.target.dataset.project);
 			loadSidebarNav();
 			loadMainPage();
 		}

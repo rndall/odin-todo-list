@@ -8,10 +8,7 @@ const addProject = (name, todos) => {
 	projects.push(project);
 };
 
-const deleteProject = (name) => {
-	const index = projects.findIndex((proj) => name === proj.name);
-	projects.splice(index, 1);
-};
+const deleteProject = (index) => projects.splice(index, 1);
 
 addProject("Default");
 

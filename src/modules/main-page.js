@@ -1,6 +1,7 @@
-import { getProjects } from "./todo-list";
+import { pl } from "date-fns/locale";
+import { deleteProject, getProjects } from "./todo-list";
 
-function createMainPage({ name, todos }) {
+function createMainPage({ name, todos }, index) {
 	const main = document.createElement("div");
 	main.classList.add("container");
 
@@ -29,6 +30,7 @@ function createMainPage({ name, todos }) {
 	deleteProjectBtn.classList.add("button");
 	deleteProjectBtn.textContent = "Delete Project";
 	deleteProjectBtn.id = "delete-project";
+	deleteProjectBtn.dataset.project = index;
 
 	const todosDiv = document.createElement("div");
 	todosDiv.classList.add("todos");
@@ -73,23 +75,13 @@ function createMainPage({ name, todos }) {
 	return main;
 }
 
-function loadMainPage(tab) {
+function loadMainPage(index = 0) {
 	const projects = getProjects();
 	const mainDiv = document.querySelector("#main");
 	mainDiv.textContent = "";
 
 	if (!projects.length) return;
-
-	if (!tab) {
-		mainDiv.appendChild(createMainPage(projects[0]));
-		return;
-	}
-
-	for (const proj of projects) {
-		if (tab === proj.name) {
-			mainDiv.appendChild(createMainPage(proj));
-		}
-	}
+	mainDiv.appendChild(createMainPage(projects[index], index));
 }
 
 export { loadMainPage };
