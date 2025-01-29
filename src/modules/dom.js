@@ -1,40 +1,16 @@
-import { createMainPage } from "./main-page";
-import { createSidebarNav } from "./sidebar-nav";
-import { addProject, getProjects } from "./todo-list";
-
-const projects = getProjects();
-
-function loadSidebar() {
-	const nav = document.querySelector(".nav");
-
-	nav.textContent = "";
-	nav.appendChild(createSidebarNav(projects));
-}
-
-function loadTab(tab) {
-	const mainDiv = document.querySelector("#main");
-
-	for (const proj of projects) {
-		if (tab === proj.name) {
-			mainDiv.textContent = "";
-			mainDiv.append(createMainPage(proj));
-		}
-	}
-}
+import { loadMainPage } from "./main-page";
+import { loadSidebarNav } from "./sidebar-nav";
+import { addProject, deleteProject } from "./todo-list";
 
 function updateScreen() {
+	loadSidebarNav();
+	loadMainPage("Default");
+
 	const nav = document.querySelector(".nav");
-
-	// Load sidebar nav on page load
-	loadSidebar();
-
-	// Load default project on page load
-	loadTab("Default");
-
 	nav.addEventListener("click", (e) => {
 		if (e.target.matches(".nav__button")) {
 			const btnText = e.target.textContent;
-			loadTab(btnText);
+			loadMainPage(btnText);
 		}
 	});
 
@@ -51,12 +27,22 @@ function updateScreen() {
 			addProject(inputVal);
 			newProjectInput.value = "";
 			newProjectDialog.close();
-			loadSidebar();
-			loadTab(inputVal);
+			loadSidebarNav();
+			loadMainPage(inputVal);
 		}
 	});
 	newProjectBtn.addEventListener("click", () => newProjectDialog.showModal());
 	closeNewProjectBtn.addEventListener("click", () => newProjectDialog.close());
+
+	const main = document.querySelector("#main");
+	main.addEventListener("click", (e) => {
+		if (e.target.matches("#delete-project")) {
+			const projectName = document.querySelector("#project-name");
+			deleteProject(projectName.textContent);
+			loadSidebarNav();
+			loadMainPage();
+		}
+	});
 }
 
 export { updateScreen };

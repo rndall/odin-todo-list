@@ -78,8 +78,11 @@ function loadMainPage(tab) {
 	const mainDiv = document.querySelector("#main");
 	mainDiv.textContent = "";
 
+	if (!projects.length) return;
+
 	if (!tab) {
 		mainDiv.appendChild(createMainPage(projects[0]));
+		return;
 	}
 
 	for (const proj of projects) {
