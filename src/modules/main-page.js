@@ -47,7 +47,7 @@ function createMainPage({ name, todos }) {
 
 		const todoPriority = document.createElement("select");
 
-		const priorityOptions = ["High", "Medium", "Low"];
+		const priorityOptions = ["Low", "Medium", "High"];
 		for (const option of priorityOptions) {
 			const optionEl = document.createElement("option");
 			optionEl.value = option;
