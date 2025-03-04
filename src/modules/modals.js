@@ -1,6 +1,7 @@
 import { addProject, getCurrentProject } from "./todo-list"
 import { updateProjectsNavList } from "./sidebar"
 import { updateMainPage } from "./main-page"
+import { format } from "date-fns"
 
 const newProjectDialog = document.querySelector("#new-project")
 const closeNewProjectBtn = document.querySelector("#project-close")
@@ -37,6 +38,7 @@ const todoPriority = document.querySelector("#priority")
 
 function showNewTodoModal() {
   newTodoDialog.showModal()
+  todoDueDate.value = format(new Date(), "yyyy-MM-dd")
 }
 
 closeNewTodoBtn.addEventListener("click", () => newTodoDialog.close())
