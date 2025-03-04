@@ -111,6 +111,11 @@ body {
   border-left: 6px solid red;
 }
 
+.todo-list__content {
+  display: flex;
+  gap: 16px;
+}
+
 .todo-list__buttons {
   display: flex;
   gap: 12px;

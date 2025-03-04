@@ -42,9 +42,12 @@ function createMainPage(projectId) {
       `todo-list__item--priority-${todo.getPriority().toLowerCase()}`
     )
     todoItem.innerHTML = `
-      <div>
-        <h3 class="todo-list__title">${todo.title}</h3>
-        <p class="todo-list__due">${todo.dueDate}</p>
+      <div class="todo-list__content">
+        <input type="checkbox">
+        <div>
+          <h3 class="todo-list__title">${todo.title}</h3>
+          <p class="todo-list__due">${todo.dueDate}</p>
+        </div>
       </div>
 
       <div class="todo-list__buttons" data-id="${todo.id}">
