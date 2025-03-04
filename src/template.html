@@ -27,6 +27,40 @@
       </form>
     </dialog>
 
+    <dialog class="dialog" id="new-todo">
+      <div class="flex justify-between">
+        <h3>New Todo</h3>
+        <button class="button" id="todo-close">x</button>
+      </div>
+      <form class="form" id="todo-form">
+        <label class="form__label"
+          >Title
+          <input class="form__input" type="text" id="title" autofocus required
+        /></label>
+
+        <label class="form__label"
+          >Description
+          <input class="form__input" type="text" id="description" required
+        /></label>
+
+        <label class="form__label"
+          >Due Date
+          <input class="form__input" type="date" id="due_date" required
+        /></label>
+
+        <label class="form__label"
+          >Priority
+          <select class="form__select" id="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select></label
+        >
+
+        <button class="button form__button">Create</button>
+      </form>
+    </dialog>
+
     <aside class="aside">
       <h1>Todo List</h1>
 
