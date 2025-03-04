@@ -13,6 +13,6 @@ const deleteProject = (id) => {
   projects.splice(projectIndex, 1)
 }
 
-addProject("Default")
+const getProject = (id) => projects.find((project) => id === project.id)
 
-export { getProjects, addProject, deleteProject }
+export { getProjects, addProject, deleteProject, getProject }
