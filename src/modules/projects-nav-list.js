@@ -1,4 +1,5 @@
 import { getProjects, deleteProject } from "./todo-list"
+import { updateMainPage } from "./main-page"
 
 function createProjectsNavList() {
   const projects = getProjects()
@@ -6,11 +7,14 @@ function createProjectsNavList() {
   const ul = document.createElement("ul")
   ul.classList.add("list")
   ul.addEventListener("click", (e) => {
+    const projectId = +e.target.parentElement.dataset.id
+
     if (e.target.matches(".nav__button--project")) {
-      // Project switching logic
+      updateMainPage(projectId)
     } else if (e.target.matches(".nav__button--delete")) {
-      deleteProject(+e.target.parentElement.dataset.id)
+      deleteProject(projectId)
       updateProjectsNavList()
+      updateMainPage()
     }
   })
 
