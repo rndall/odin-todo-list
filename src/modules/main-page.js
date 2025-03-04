@@ -37,7 +37,10 @@ function createMainPage(projectId) {
 
   project.todos.forEach((todo) => {
     const todoItem = document.createElement("div")
-    todoItem.classList.add("todo-list__item")
+    todoItem.classList.add(
+      "todo-list__item",
+      `todo-list__item--priority-${todo.getPriority().toLowerCase()}`
+    )
     todoItem.innerHTML = `
       <div>
         <h3 class="todo-list__title">${todo.title}</h3>
