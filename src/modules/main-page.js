@@ -42,20 +42,41 @@ function createMainPage(projectId) {
       `todo-list__item--priority-${todo.getPriority().toLowerCase()}`
     )
     todoItem.dataset.id = todo.id
-    todoItem.innerHTML = `
-      <div class="todo-list__content">
-        <input type="checkbox" class="todo-list__status">
-        <div>
-          <h3 class="todo-list__title">${todo.title}</h3>
-          <p class="todo-list__due">${todo.dueDate}</p>
-        </div>
-      </div>
 
-      <div class="todo-list__buttons">
-        <button class="todo-list__edit button">Edit</button>
-        <button class="todo-list__del button">x</button>
-      </div>
-    `
+    const todoContent = document.createElement("div")
+    todoContent.classList.add("todo-list__content")
+
+    const todoStatus = document.createElement("input")
+    todoStatus.type = "checkbox"
+    todoStatus.classList.add("todo-list__status")
+    todoStatus.checked = todo.getStatus()
+
+    const textContainer = document.createElement("div")
+    const titleElement = document.createElement("h3")
+    titleElement.classList.add("todo-list__title")
+    titleElement.textContent = todo.title
+
+    const dueDateElement = document.createElement("p")
+    dueDateElement.classList.add("todo-list__due")
+    dueDateElement.textContent = todo.dueDate
+
+    textContainer.append(titleElement, dueDateElement)
+
+    todoContent.append(todoStatus, textContainer)
+
+    const buttonsContainer = document.createElement("div")
+    buttonsContainer.classList.add("todo-list__buttons")
+
+    const editButton = document.createElement("button")
+    editButton.classList.add("todo-list__edit", "button")
+    editButton.textContent = "Edit"
+
+    const deleteButton = document.createElement("button")
+    deleteButton.classList.add("todo-list__del", "button")
+    deleteButton.textContent = "x"
+
+    buttonsContainer.append(editButton, deleteButton)
+    todoItem.append(todoContent, buttonsContainer)
     todoList.appendChild(todoItem)
   })
 
