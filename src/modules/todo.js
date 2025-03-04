@@ -7,8 +7,8 @@ export default function createTodo(title, description, dueDate, priority) {
 
   let status = false
   const getStatus = () => status
-  const toggleStatus = () => {
-    status = !status
+  const setStatus = (newStatus) => {
+    status = newStatus
   }
 
   return {
@@ -17,7 +17,7 @@ export default function createTodo(title, description, dueDate, priority) {
     description,
     dueDate,
     getStatus,
-    toggleStatus,
+    setStatus,
     getPriority,
     setPriority,
   }
