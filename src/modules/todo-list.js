@@ -6,6 +6,7 @@ const getProjects = () => projects
 const addProject = (name) => {
   const project = createProject(name)
   projects.push(project)
+  return project
 }
 
 const deleteProject = (id) => {

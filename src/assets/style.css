@@ -5,6 +5,41 @@ body {
   grid-template-columns: 250px 1fr;
 }
 
+.dialog {
+  border-radius: 0.75rem;
+  place-self: center;
+}
+
+.dialog > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.form__label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form__input,
+.form__select {
+  display: block;
+}
+
+.form__button {
+  margin-top: 12px;
+}
+
 .aside,
 .main {
   padding: 16px;

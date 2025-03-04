@@ -1,5 +1,9 @@
 import { getProjects, deleteProject } from "./todo-list"
 import { updateMainPage } from "./main-page"
+import { showNewProjectModal } from "./modals"
+
+const addProjectBtn = document.querySelector("#add-project")
+addProjectBtn.addEventListener("click", () => showNewProjectModal())
 
 function createProjectsNavList() {
   const projects = getProjects()
