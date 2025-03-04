@@ -47,12 +47,21 @@ function createMainPage(projectId) {
         <p class="todo-list__due">${todo.dueDate}</p>
       </div>
 
-      <div class="todo-list__buttons">
+      <div class="todo-list__buttons" data-id="${todo.id}">
         <button class="todo-list__edit button">Edit</button>
         <button class="todo-list__del button">x</button>
       </div>
     `
     todoList.appendChild(todoItem)
+  })
+
+  todoList.addEventListener("click", (e) => {
+    const todoId = +e.target.parentElement.dataset.id
+
+    if (e.target.matches(".todo-list__del")) {
+      project.removeTodo(todoId)
+      updateMainPage(project.id)
+    }
   })
 
   container.appendChild(todoList)
