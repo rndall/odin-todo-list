@@ -15,4 +15,6 @@ const deleteProject = (id) => {
 
 const getProject = (id) => projects.find((project) => id === project.id)
 
+addProject("Default")
+
 export { getProjects, addProject, deleteProject, getProject }
