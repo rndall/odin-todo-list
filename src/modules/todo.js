@@ -1,4 +1,13 @@
 export default function createTodo(title, description, dueDate, priority) {
+  let currTitle = title
+  const getTitle = () => currTitle
+
+  let currDescription = description
+  const getDescription = () => currDescription
+
+  let currDue = dueDate
+  const getDueDate = () => currDue
+
   let currPriority = priority
   const getPriority = () => currPriority
   const setPriority = (newPriority) => {
@@ -11,14 +20,22 @@ export default function createTodo(title, description, dueDate, priority) {
     status = newStatus
   }
 
+  const edit = (title, description, dueDate, priority) => {
+    currTitle = title
+    currDescription = description
+    currDue = dueDate
+    currPriority = priority
+  }
+
   return {
     id: Date.now(),
-    title,
-    description,
-    dueDate,
+    getTitle,
+    getDescription,
+    getDueDate,
     getStatus,
     setStatus,
     getPriority,
     setPriority,
+    edit,
   }
 }
