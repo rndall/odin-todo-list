@@ -41,16 +41,17 @@ function createMainPage(projectId) {
       "todo-list__item",
       `todo-list__item--priority-${todo.getPriority().toLowerCase()}`
     )
+    todoItem.dataset.id = todo.id
     todoItem.innerHTML = `
       <div class="todo-list__content">
-        <input type="checkbox">
+        <input type="checkbox" class="todo-list__status">
         <div>
           <h3 class="todo-list__title">${todo.title}</h3>
           <p class="todo-list__due">${todo.dueDate}</p>
         </div>
       </div>
 
-      <div class="todo-list__buttons" data-id="${todo.id}">
+      <div class="todo-list__buttons">
         <button class="todo-list__edit button">Edit</button>
         <button class="todo-list__del button">x</button>
       </div>
@@ -59,9 +60,12 @@ function createMainPage(projectId) {
   })
 
   todoList.addEventListener("click", (e) => {
-    const todoId = +e.target.parentElement.dataset.id
+    const todoId = +e.target.parentElement.parentElement.dataset.id
 
-    if (e.target.matches(".todo-list__del")) {
+    if (e.target.matches(".todo-list__status")) {
+      const todo = project.getTodo(todoId)
+      todo.setStatus(e.target.checked)
+    } else if (e.target.matches(".todo-list__del")) {
       project.removeTodo(todoId)
       updateMainPage(project.id)
     }
