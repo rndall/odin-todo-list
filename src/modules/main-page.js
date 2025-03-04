@@ -1,4 +1,5 @@
-import { getProjects, getProject } from "./todo-list"
+import { getProjects, getProject, setCurrentProject } from "./todo-list"
+import { showNewTodoModal } from "./modals"
 
 function createMainPage(projectId) {
   let project
@@ -8,6 +9,7 @@ function createMainPage(projectId) {
   } else {
     project = getProject(projectId)
   }
+  setCurrentProject(project)
 
   if (!project) return
   const container = document.createElement("div")
@@ -23,6 +25,12 @@ function createMainPage(projectId) {
       <button class="button" id="add-todo">Add Todo</button>
     </div>
   `
+
+  container.addEventListener("click", (e) => {
+    if (e.target.matches("#add-todo")) {
+      showNewTodoModal()
+    }
+  })
 
   const todoList = document.createElement("div")
   todoList.classList.add("todo-list")
