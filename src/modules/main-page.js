@@ -12,10 +12,16 @@ function createMainPage(projectId) {
   if (!project) return
   const container = document.createElement("div")
   container.innerHTML = `
-    <h2>${project.name}</h2>
-    <p>${project.todos.length} ${
+    <div class="main__header">
+      <div>
+        <h2>${project.name}</h2>
+        <p>${project.todos.length} ${
     project.todos.length === 1 ? "todo" : "todos"
   }</p>
+      </div>
+
+      <button class="button" id="add-todo">Add Todo</button>
+    </div>
   `
 
   const todoList = document.createElement("div")
