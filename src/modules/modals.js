@@ -29,38 +29,62 @@ newProjectForm.addEventListener("submit", (e) => {
 
 const todoDialog = document.querySelector("#todo")
 const closeNewTodoBtn = document.querySelector("#todo-close")
-const newTodoForm = document.querySelector("#todo-form")
+const todoForm = document.querySelector("#todo-form")
 
 const todoTitle = document.querySelector("#title")
 const todoDesc = document.querySelector("#description")
 const todoDueDate = document.querySelector("#due_date")
 const todoPriority = document.querySelector("#priority")
 
+let todoToEdit = null
+
 function showNewTodoModal() {
+  todoToEdit = null
   todoDialog.showModal()
   todoDueDate.value = format(new Date(), "yyyy-MM-dd")
 }
 
-closeNewTodoBtn.addEventListener("click", () => todoDialog.close())
+function editTodoModal(id) {
+  todoDialog.showModal()
 
-newTodoForm.addEventListener("submit", (e) => {
+  todoToEdit = getCurrentProject().getTodo(id)
+  todoTitle.value = todoToEdit.getTitle()
+  todoDesc.value = todoToEdit.getDescription()
+  todoDueDate.value = todoToEdit.getDueDate()
+  todoPriority.value = todoToEdit.getPriority()
+}
+
+closeNewTodoBtn.addEventListener("click", () => {
+  todoDialog.close()
+})
+
+todoForm.addEventListener("submit", (e) => {
   e.preventDefault()
 
   const project = getCurrentProject()
-  project.addTodo(
-    todoTitle.value.trim(),
-    todoDesc.value.trim(),
-    todoDueDate.value,
-    todoPriority.value
-  )
 
-  todoTitle.value = ""
-  todoDesc.value = ""
-  todoDueDate.value = ""
-  todoPriority.selectedIndex = 0
+  if (todoToEdit) {
+    todoToEdit.edit(
+      todoTitle.value.trim(),
+      todoDesc.value.trim(),
+      todoDueDate.value,
+      todoPriority.value
+    )
+  } else {
+    project.addTodo(
+      todoTitle.value.trim(),
+      todoDesc.value.trim(),
+      todoDueDate.value,
+      todoPriority.value
+    )
+  }
 
   updateMainPage(project.id)
   todoDialog.close()
 })
 
-export { showNewProjectModal, showNewTodoModal }
+todoDialog.addEventListener("close", () => {
+  todoForm.reset()
+})
+
+export { showNewProjectModal, showNewTodoModal, editTodoModal }

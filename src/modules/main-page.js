@@ -1,5 +1,5 @@
 import { getProjects, getProject, setCurrentProject } from "./todo-list"
-import { showNewTodoModal } from "./modals"
+import { showNewTodoModal, editTodoModal } from "./modals"
 
 function createMainPage(projectId) {
   let project
@@ -54,11 +54,11 @@ function createMainPage(projectId) {
     const textContainer = document.createElement("div")
     const titleElement = document.createElement("h3")
     titleElement.classList.add("todo-list__title")
-    titleElement.textContent = todo.title
+    titleElement.textContent = todo.getTitle()
 
     const dueDateElement = document.createElement("p")
     dueDateElement.classList.add("todo-list__due")
-    dueDateElement.textContent = todo.dueDate
+    dueDateElement.textContent = todo.getDueDate()
 
     textContainer.append(titleElement, dueDateElement)
 
@@ -89,6 +89,8 @@ function createMainPage(projectId) {
     } else if (e.target.matches(".todo-list__del")) {
       project.removeTodo(todoId)
       updateMainPage(project.id)
+    } else if (e.target.matches(".todo-list__edit")) {
+      editTodoModal(todoId)
     }
   })
 
