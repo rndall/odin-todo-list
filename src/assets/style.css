@@ -37,3 +37,29 @@ body {
   display: none;
   width: auto;
 }
+
+.main > div {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.todo-list {
+  margin-top: 36px;
+  display: grid;
+  gap: 24px;
+}
+
+.todo-list__item {
+  padding: 12px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.486);
+  border-left: 6px solid red;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-list__buttons {
+  display: flex;
+  gap: 12px;
+}
