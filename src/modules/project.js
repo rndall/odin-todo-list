@@ -11,5 +11,7 @@ export default function createProject(name) {
     todos.splice(todoIndex, 1)
   }
 
-  return { id: Date.now(), name, todos, addTodo, removeTodo }
+  const getTodo = (id) => todos.find((todo) => id === todo.id)
+
+  return { id: Date.now(), name, todos, addTodo, removeTodo, getTodo }
 }
