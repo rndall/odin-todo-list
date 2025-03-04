@@ -48,6 +48,7 @@ body {
 .projects div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .list {
