@@ -17,8 +17,8 @@ function createMainPage(projectId) {
     <div class="main__header">
       <div>
         <h2>${project.name}</h2>
-        <p>${project.todos.length} ${
-    project.todos.length === 1 ? "todo" : "todos"
+        <p>${project.getTodos().length} ${
+    project.getTodos().length === 1 ? "todo" : "todos"
   }</p>
       </div>
 
@@ -35,7 +35,7 @@ function createMainPage(projectId) {
   const todoList = document.createElement("div")
   todoList.classList.add("todo-list")
 
-  project.todos.forEach((todo) => {
+  project.getTodos().forEach((todo) => {
     const todoItem = document.createElement("div")
     todoItem.classList.add(
       "todo-list__item",

@@ -2,6 +2,7 @@ import createTodo from "./todo"
 
 export default function createProject(name) {
   const todos = []
+  const getTodos = () => todos
 
   const addTodo = (title, description, dueDate, priority) =>
     todos.push(createTodo(title, description, dueDate, priority))
@@ -13,5 +14,5 @@ export default function createProject(name) {
 
   const getTodo = (id) => todos.find((todo) => id === todo.id)
 
-  return { id: Date.now(), name, todos, addTodo, removeTodo, getTodo }
+  return { id: Date.now(), name, getTodos, addTodo, removeTodo, getTodo }
 }
