@@ -27,7 +27,7 @@ newProjectForm.addEventListener("submit", (e) => {
   updateMainPage(project.id)
 })
 
-const newTodoDialog = document.querySelector("#new-todo")
+const todoDialog = document.querySelector("#todo")
 const closeNewTodoBtn = document.querySelector("#todo-close")
 const newTodoForm = document.querySelector("#todo-form")
 
@@ -37,11 +37,11 @@ const todoDueDate = document.querySelector("#due_date")
 const todoPriority = document.querySelector("#priority")
 
 function showNewTodoModal() {
-  newTodoDialog.showModal()
+  todoDialog.showModal()
   todoDueDate.value = format(new Date(), "yyyy-MM-dd")
 }
 
-closeNewTodoBtn.addEventListener("click", () => newTodoDialog.close())
+closeNewTodoBtn.addEventListener("click", () => todoDialog.close())
 
 newTodoForm.addEventListener("submit", (e) => {
   e.preventDefault()
@@ -60,7 +60,7 @@ newTodoForm.addEventListener("submit", (e) => {
   todoPriority.selectedIndex = 0
 
   updateMainPage(project.id)
-  newTodoDialog.close()
+  todoDialog.close()
 })
 
 export { showNewProjectModal, showNewTodoModal }
