@@ -7,13 +7,33 @@
   </head>
 
   <body>
+    <dialog class="dialog" id="new-project">
+      <div>
+        <h3>New Project</h3>
+        <button class="button" id="project-close">x</button>
+      </div>
+      <form class="form" id="project-form">
+        <label class="form__label"
+          >Project Name
+          <input
+            class="form__input"
+            type="text"
+            id="project_name"
+            autofocus
+            required
+        /></label>
+
+        <button class="button form__button">Create</button>
+      </form>
+    </dialog>
+
     <aside class="aside">
       <h1>Todo List</h1>
 
       <div class="projects">
         <div>
           <h2>Projects</h2>
-          <button>+</button>
+          <button class="button" id="add-project">+</button>
         </div>
 
         <nav class="nav"></nav>
