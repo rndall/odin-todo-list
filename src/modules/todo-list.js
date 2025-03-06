@@ -1,7 +1,8 @@
 import createProject from "./project"
 
+const timedProjects = []
 const projects = []
-const getProjects = () => projects
+const getProjects = (arg) => (arg === "timed" ? timedProjects : projects)
 
 let currProject = null
 const getCurrentProject = () => currProject
@@ -9,9 +10,9 @@ const setCurrentProject = (project) => {
   currProject = project
 }
 
-const addProject = (name) => {
+const addProject = (name, store = projects) => {
   const project = createProject(name)
-  projects.push(project)
+  store.push(project)
   return project
 }
 
@@ -20,8 +21,16 @@ const deleteProject = (id) => {
   projects.splice(projectIndex, 1)
 }
 
-const getProject = (id) => projects.find((project) => id === project.id)
+const getProject = (id, arg) => {
+  if (arg === "timed") {
+    return timedProjects.find((project) => id === project.id)
+  }
 
+  return projects.find((project) => id === project.id)
+}
+
+addProject("Today", timedProjects).id = 1
+addProject("This Week", timedProjects).id = 2
 addProject("Default")
 
 export {

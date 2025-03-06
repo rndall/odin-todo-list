@@ -5,22 +5,26 @@ import { showNewProjectModal } from "./modals"
 const addProjectBtn = document.querySelector("#add-project")
 addProjectBtn.addEventListener("click", () => showNewProjectModal())
 
+const aside = document.querySelector(".aside")
+aside.addEventListener("click", (e) => {
+  const projectId = +e.target.parentElement.dataset.id
+
+  if (e.target.matches(".nav__button--time")) {
+    updateMainPage(projectId, true)
+  } else if (e.target.matches(".nav__button--project")) {
+    updateMainPage(projectId)
+  } else if (e.target.matches(".nav__button--delete")) {
+    deleteProject(projectId)
+    updateProjectsNavList()
+    updateMainPage()
+  }
+})
+
 function createProjectsNavList() {
   const projects = getProjects()
 
   const ul = document.createElement("ul")
   ul.classList.add("list")
-  ul.addEventListener("click", (e) => {
-    const projectId = +e.target.parentElement.dataset.id
-
-    if (e.target.matches(".nav__button--project")) {
-      updateMainPage(projectId)
-    } else if (e.target.matches(".nav__button--delete")) {
-      deleteProject(projectId)
-      updateProjectsNavList()
-      updateMainPage()
-    }
-  })
 
   projects.forEach((project) => {
     const li = document.createElement("li")

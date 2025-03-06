@@ -1,17 +1,18 @@
 import { getProjects, getProject, setCurrentProject } from "./todo-list"
 import { showNewTodoModal, editTodoModal } from "./modals"
 
-function createMainPage(projectId) {
+const main = document.querySelector(".main")
+
+function createMainPage(projectId, isTimed) {
   let project
 
   if (!projectId) {
-    project = getProjects()[0]
+    project = getProjects().length ? getProjects()[0] : getProjects("timed")[0]
   } else {
-    project = getProject(projectId)
+    project = isTimed ? getProject(projectId, "timed") : getProject(projectId)
   }
   setCurrentProject(project)
 
-  if (!project) return
   const container = document.createElement("div")
   container.innerHTML = `
     <div class="main__header">
@@ -22,7 +23,9 @@ function createMainPage(projectId) {
   }</p>
       </div>
 
-      <button class="button" id="add-todo">Add Todo</button>
+      ${
+        !isTimed ? '<button class="button" id="add-todo">Add Todo</button>' : ""
+      }
     </div>
   `
 
@@ -107,9 +110,8 @@ function createMainPage(projectId) {
   return container
 }
 
-function updateMainPage(projectId) {
-  const main = document.querySelector(".main")
-  const mainPage = createMainPage(projectId)
+function updateMainPage(projectId, isTimed = false) {
+  const mainPage = createMainPage(projectId, isTimed)
   main.innerHTML = ""
 
   if (!mainPage) return
