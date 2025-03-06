@@ -92,6 +92,7 @@ body {
 }
 
 .todo-list__item {
+  cursor: pointer;
   padding: 12px;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.486);
   border-radius: 12px;
@@ -112,9 +113,26 @@ body {
   border-left: 6px solid red;
 }
 
+.todo-list__item:hover .todo-list__details {
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
 .todo-list__content {
   display: flex;
   gap: 16px;
+  align-items: center;
+}
+
+.todo-list__details {
+  width: 60%;
+  opacity: 0;
+  margin-left: 32px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  gap: 32px;
+  justify-items: center;
 }
 
 .todo-list__buttons {

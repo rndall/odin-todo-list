@@ -62,6 +62,15 @@ function createMainPage(projectId) {
 
     textContainer.append(titleElement, dueDateElement)
 
+    const moreTodoDetails = document.createElement("div")
+    moreTodoDetails.classList.add("todo-list__details")
+    const todoDesc = document.createElement("p")
+    todoDesc.classList.add("todo-list__desc")
+    todoDesc.textContent = todo.getDescription()
+    const todoPrio = document.createElement("p")
+    todoPrio.textContent = `${todo.getPriority()} Priority`
+    moreTodoDetails.append(todoDesc, todoPrio)
+
     todoContent.append(todoStatus, textContainer)
 
     const buttonsContainer = document.createElement("div")
@@ -76,7 +85,7 @@ function createMainPage(projectId) {
     deleteButton.textContent = "x"
 
     buttonsContainer.append(editButton, deleteButton)
-    todoItem.append(todoContent, buttonsContainer)
+    todoItem.append(todoContent, moreTodoDetails, buttonsContainer)
     todoList.appendChild(todoItem)
   })
 
