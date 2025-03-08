@@ -1,4 +1,4 @@
-import { addProject, getCurrentProject } from "./todo-list"
+import { addProject, getCurrentProject, getProjects } from "./todo-list"
 import { updateProjectsNavList } from "./sidebar"
 import { updateMainPage } from "./main-page"
 import { format } from "date-fns"
@@ -45,6 +45,7 @@ function showNewTodoModal() {
 }
 
 function editTodoModal(id) {
+  todoId = id
   todoDialog.showModal()
 
   todoToEdit = getCurrentProject().getTodo(id)
@@ -58,10 +59,21 @@ closeNewTodoBtn.addEventListener("click", () => {
   todoDialog.close()
 })
 
+let todoId
+
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault()
 
-  const project = getCurrentProject()
+  const currProject = getCurrentProject()
+  let project = currProject
+  if (currProject.isTimed) {
+    getProjects().forEach((proj) => {
+      const todo = proj.getTodos().find((todo) => todoId === todo.id)
+      if (todo) {
+        project = proj
+      }
+    })
+  }
 
   if (todoToEdit) {
     todoToEdit.edit(
@@ -79,7 +91,7 @@ todoForm.addEventListener("submit", (e) => {
     )
   }
 
-  updateMainPage(project.id)
+  updateMainPage(currProject.id, currProject.isTimed)
   todoDialog.close()
 })
 

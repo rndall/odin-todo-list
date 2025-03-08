@@ -1,3 +1,5 @@
+import { mapTimedProjects } from "./todo-list"
+
 export default function createTodo(title, description, dueDate, priority) {
   let currTitle = title
   const getTitle = () => currTitle
@@ -25,6 +27,7 @@ export default function createTodo(title, description, dueDate, priority) {
     currDescription = description
     currDue = dueDate
     currPriority = priority
+    mapTimedProjects()
   }
 
   return {

@@ -99,8 +99,17 @@ function createMainPage(projectId, isTimed) {
       const todo = project.getTodo(todoId)
       todo.setStatus(e.target.checked)
     } else if (e.target.matches(".todo-list__del")) {
-      project.removeTodo(todoId)
-      updateMainPage(project.id)
+      if (isTimed) {
+        getProjects().forEach((project) => {
+          const todo = project.getTodos().find((todo) => todoId === todo.id)
+          if (todo) {
+            project.removeTodo(todoId)
+          }
+        })
+      } else {
+        project.removeTodo(todoId)
+      }
+      updateMainPage(project.id, isTimed)
     } else if (e.target.matches(".todo-list__edit")) {
       editTodoModal(todoId)
     }

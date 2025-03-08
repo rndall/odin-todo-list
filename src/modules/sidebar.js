@@ -1,4 +1,4 @@
-import { getProjects, deleteProject } from "./todo-list"
+import { getProjects, deleteProject, mapTimedProjects } from "./todo-list"
 import { updateMainPage } from "./main-page"
 import { showNewProjectModal } from "./modals"
 
@@ -16,6 +16,7 @@ aside.addEventListener("click", (e) => {
   } else if (e.target.matches(".nav__button--delete")) {
     deleteProject(projectId)
     updateProjectsNavList()
+    mapTimedProjects()
     updateMainPage()
   }
 })
