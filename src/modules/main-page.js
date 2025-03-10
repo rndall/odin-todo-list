@@ -97,7 +97,7 @@ function createMainPage(projectId, isTimed) {
 
     if (e.target.matches(".todo-list__status")) {
       const todo = project.getTodo(todoId)
-      todo.status = e.target.checked
+      todo.setStatus(e.target.checked)
     } else if (e.target.matches(".todo-list__del")) {
       if (isTimed) {
         getProjects().forEach((project) => {

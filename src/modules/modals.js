@@ -88,6 +88,7 @@ todoForm.addEventListener("submit", (e) => {
   } else {
     project.addTodo(
       new Todo(
+        project.name,
         todoTitle.value.trim(),
         todoDesc.value.trim(),
         todoDueDate.value,

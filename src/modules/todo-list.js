@@ -1,4 +1,4 @@
-import Project from "./project"
+import { saveToLocalStorage } from "./local-storage"
 import { format } from "date-fns"
 
 const timedProjects = []
@@ -11,13 +11,19 @@ const setCurrentProject = (project) => {
   currProject = project
 }
 
-const addProject = (project, store = projects) => {
-  store.push(project)
+const addProject = (project, isTimed = false) => {
+  if (isTimed) {
+    timedProjects.push(project)
+  } else {
+    projects.push(project)
+  }
+  saveToLocalStorage()
 }
 
 const deleteProject = (id) => {
   const projectIndex = projects.findIndex((project) => id === project.id)
   projects.splice(projectIndex, 1)
+  saveToLocalStorage()
 }
 
 const getProject = (id, arg) => {
@@ -54,19 +60,9 @@ const mapTimedProjects = () => {
       )
     )
   })
-  todayProjects.todos = todayProjs
-  thisWeekProjects.todos = weekProjs
+  timedProjects[0].todos = todayProjs
+  timedProjects[1].todos = weekProjs
 }
-
-const todayProjects = new Project("Today", true)
-todayProjects.id = 1
-addProject(todayProjects, timedProjects)
-
-const thisWeekProjects = new Project("This Week", true)
-thisWeekProjects.id = 2
-addProject(thisWeekProjects, timedProjects)
-
-addProject(new Project("Default"))
 
 export {
   getProjects,
