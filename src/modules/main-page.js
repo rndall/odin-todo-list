@@ -18,8 +18,8 @@ function createMainPage(projectId, isTimed) {
     <div class="main__header">
       <div>
         <h2>${project.name}</h2>
-        <p>${project.getTodos().length} ${
-    project.getTodos().length === 1 ? "todo" : "todos"
+        <p>${project.todos.length} ${
+    project.todos.length === 1 ? "todo" : "todos"
   }</p>
       </div>
 
@@ -38,11 +38,11 @@ function createMainPage(projectId, isTimed) {
   const todoList = document.createElement("div")
   todoList.classList.add("todo-list")
 
-  project.getTodos().forEach((todo) => {
+  project.todos.forEach((todo) => {
     const todoItem = document.createElement("div")
     todoItem.classList.add(
       "todo-list__item",
-      `todo-list__item--priority-${todo.getPriority().toLowerCase()}`
+      `todo-list__item--priority-${todo.priority.toLowerCase()}`
     )
     todoItem.dataset.id = todo.id
 
@@ -52,16 +52,16 @@ function createMainPage(projectId, isTimed) {
     const todoStatus = document.createElement("input")
     todoStatus.type = "checkbox"
     todoStatus.classList.add("todo-list__status")
-    todoStatus.checked = todo.getStatus()
+    todoStatus.checked = todo.status
 
     const textContainer = document.createElement("div")
     const titleElement = document.createElement("h3")
     titleElement.classList.add("todo-list__title")
-    titleElement.textContent = todo.getTitle()
+    titleElement.textContent = todo.title
 
     const dueDateElement = document.createElement("p")
     dueDateElement.classList.add("todo-list__due")
-    dueDateElement.textContent = todo.getDueDate()
+    dueDateElement.textContent = todo.dueDate
 
     textContainer.append(titleElement, dueDateElement)
 
@@ -69,9 +69,9 @@ function createMainPage(projectId, isTimed) {
     moreTodoDetails.classList.add("todo-list__details")
     const todoDesc = document.createElement("p")
     todoDesc.classList.add("todo-list__desc")
-    todoDesc.textContent = todo.getDescription()
+    todoDesc.textContent = todo.description
     const todoPrio = document.createElement("p")
-    todoPrio.textContent = `${todo.getPriority()} Priority`
+    todoPrio.textContent = `${todo.priority} Priority`
     moreTodoDetails.append(todoDesc, todoPrio)
 
     todoContent.append(todoStatus, textContainer)
@@ -97,11 +97,11 @@ function createMainPage(projectId, isTimed) {
 
     if (e.target.matches(".todo-list__status")) {
       const todo = project.getTodo(todoId)
-      todo.setStatus(e.target.checked)
+      todo.status = e.target.checked
     } else if (e.target.matches(".todo-list__del")) {
       if (isTimed) {
         getProjects().forEach((project) => {
-          const todo = project.getTodos().find((todo) => todoId === todo.id)
+          const todo = project.todos.find((todo) => todoId === todo.id)
           if (todo) {
             project.removeTodo(todoId)
           }

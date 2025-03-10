@@ -1,34 +1,25 @@
-import createTodo from "./todo"
 import { mapTimedProjects } from "./todo-list"
 
-export default function createProject(name) {
-  let todos = []
-  const getTodos = () => todos
-  const setTodos = (newTodos) => {
-    todos = newTodos
+export default class Project {
+  constructor(name, isTimed = false, todos = []) {
+    this.id = Date.now()
+    this.name = name
+    this.isTimed = isTimed
+    this.todos = todos
   }
 
-  const addTodo = (title, description, dueDate, priority) => {
-    const todo = todos.push(createTodo(title, description, dueDate, priority))
-    mapTimedProjects()
-    return todo
-  }
-
-  const removeTodo = (id) => {
-    const todoIndex = todos.findIndex((todo) => id === todo.id)
-    todos.splice(todoIndex, 1)
+  addTodo(todo) {
+    this.todos.push(todo)
     mapTimedProjects()
   }
 
-  const getTodo = (id) => todos.find((todo) => id === todo.id)
+  removeTodo(todoId) {
+    const todoIndex = this.todos.findIndex((todo) => todoId === todo.id)
+    this.todos.splice(todoIndex, 1)
+    mapTimedProjects()
+  }
 
-  return {
-    id: Date.now(),
-    name,
-    getTodos,
-    setTodos,
-    addTodo,
-    removeTodo,
-    getTodo,
+  getTodo(todoId) {
+    return this.todos.find((todo) => todoId === todo.id)
   }
 }

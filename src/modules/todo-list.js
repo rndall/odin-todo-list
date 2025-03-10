@@ -1,4 +1,4 @@
-import createProject from "./project"
+import Project from "./project"
 import { format } from "date-fns"
 
 const timedProjects = []
@@ -11,10 +11,8 @@ const setCurrentProject = (project) => {
   currProject = project
 }
 
-const addProject = (name, store = projects) => {
-  const project = createProject(name)
+const addProject = (project, store = projects) => {
   store.push(project)
-  return project
 }
 
 const deleteProject = (id) => {
@@ -46,27 +44,29 @@ const mapTimedProjects = () => {
 
   projects.forEach((project) => {
     todayProjs.push(
-      ...project.getTodos().filter((todo) => {
-        return format(today, "yyyy-MM-dd") === todo.getDueDate()
+      ...project.todos.filter((todo) => {
+        return format(today, "yyyy-MM-dd") === todo.dueDate
       })
     )
     weekProjs.push(
-      ...project
-        .getTodos()
-        .filter((todo) => getDayDiff(today, new Date(todo.getDueDate())) <= 7)
+      ...project.todos.filter(
+        (todo) => getDayDiff(today, new Date(todo.dueDate)) <= 7
+      )
     )
   })
-  todayProjects.setTodos(todayProjs)
-  thisWeekProjects.setTodos(weekProjs)
+  todayProjects.todos = todayProjs
+  thisWeekProjects.todos = weekProjs
 }
 
-const todayProjects = addProject("Today", timedProjects)
+const todayProjects = new Project("Today", true)
 todayProjects.id = 1
-todayProjects.isTimed = true
-const thisWeekProjects = addProject("This Week", timedProjects)
+addProject(todayProjects, timedProjects)
+
+const thisWeekProjects = new Project("This Week", true)
 thisWeekProjects.id = 2
-thisWeekProjects.isTimed = true
-addProject("Default")
+addProject(thisWeekProjects, timedProjects)
+
+addProject(new Project("Default"))
 
 export {
   getProjects,

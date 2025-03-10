@@ -1,4 +1,6 @@
 import { addProject, getCurrentProject, getProjects } from "./todo-list"
+import Project from "./project"
+import Todo from "./todo"
 import { updateProjectsNavList } from "./sidebar"
 import { updateMainPage } from "./main-page"
 import { format } from "date-fns"
@@ -20,7 +22,8 @@ newProjectForm.addEventListener("submit", (e) => {
   const inputVal = newProjectInput.value.trim()
   if (!inputVal) return
 
-  const project = addProject(inputVal)
+  const project = new Project(inputVal)
+  addProject(project)
   newProjectInput.value = ""
   newProjectDialog.close()
   updateProjectsNavList()
@@ -49,10 +52,10 @@ function editTodoModal(id) {
   todoDialog.showModal()
 
   todoToEdit = getCurrentProject().getTodo(id)
-  todoTitle.value = todoToEdit.getTitle()
-  todoDesc.value = todoToEdit.getDescription()
-  todoDueDate.value = todoToEdit.getDueDate()
-  todoPriority.value = todoToEdit.getPriority()
+  todoTitle.value = todoToEdit.title
+  todoDesc.value = todoToEdit.description
+  todoDueDate.value = todoToEdit.dueDate
+  todoPriority.value = todoToEdit.priority
 }
 
 closeNewTodoBtn.addEventListener("click", () => {
@@ -68,7 +71,7 @@ todoForm.addEventListener("submit", (e) => {
   let project = currProject
   if (currProject.isTimed) {
     getProjects().forEach((proj) => {
-      const todo = proj.getTodos().find((todo) => todoId === todo.id)
+      const todo = proj.todos.find((todo) => todoId === todo.id)
       if (todo) {
         project = proj
       }
@@ -84,10 +87,12 @@ todoForm.addEventListener("submit", (e) => {
     )
   } else {
     project.addTodo(
-      todoTitle.value.trim(),
-      todoDesc.value.trim(),
-      todoDueDate.value,
-      todoPriority.value
+      new Todo(
+        todoTitle.value.trim(),
+        todoDesc.value.trim(),
+        todoDueDate.value,
+        todoPriority.value
+      )
     )
   }
 
