@@ -1,3 +1,9 @@
+:root {
+  --sidebar-bg-color: #f0f0f0;
+  --main-bg-color: #fffbff;
+  --input-border-color: rgba(0, 0, 0, 0.53);
+}
+
 body {
   font-family: system-ui, sans-serif;
   min-height: 100dvh;
@@ -6,7 +12,8 @@ body {
 }
 
 .dialog {
-  border-radius: 0.75rem;
+  border-radius: 12px;
+  padding: 24px;
   place-self: center;
 }
 
@@ -17,6 +24,12 @@ body {
 
 .dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  border-radius: 99999px;
+  border: none;
+  padding: 4px 16px;
 }
 
 .form {
@@ -36,6 +49,17 @@ body {
   display: block;
 }
 
+.form__input,
+.form__select {
+  border-radius: 12px;
+  padding: 2px 10px;
+  border: 1px solid var(--input-border-color);
+}
+
+.form__select {
+  background-color: transparent;
+}
+
 .form__button {
   margin-top: 12px;
 }
@@ -43,6 +67,20 @@ body {
 .aside,
 .main {
   padding: 16px;
+}
+
+.aside {
+  background-color: var(--sidebar-bg-color);
+  z-index: 10;
+  box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.233);
+}
+
+.main {
+  background-color: var(--main-bg-color);
+}
+
+.projects {
+  margin-top: 24px;
 }
 
 .projects div {
@@ -53,6 +91,8 @@ body {
 
 .list {
   padding: 0;
+  display: grid;
+  gap: 8px;
 }
 
 .list__item {
@@ -122,6 +162,11 @@ body {
   display: flex;
   gap: 16px;
   align-items: center;
+  min-width: 40%;
+}
+
+.todo-list__content > p {
+  margin-inline: auto;
 }
 
 .todo-list__details {
