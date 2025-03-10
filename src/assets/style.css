@@ -2,6 +2,8 @@
   --sidebar-bg-color: #f0f0f0;
   --main-bg-color: #fffbff;
   --input-border-color: rgba(0, 0, 0, 0.53);
+  --button-bg-color: #d1d0d0;
+  --button-hover-bg-color: #c4c1c1;
 }
 
 body {
@@ -31,6 +33,12 @@ body {
   border: none;
   padding: 4px 16px;
   cursor: pointer;
+  background-color: var(--button-bg-color);
+}
+
+.button:hover {
+  transition: all 0.1s ease-in-out;
+  background-color: var(--button-hover-bg-color);
 }
 
 .form {
@@ -99,6 +107,7 @@ body {
 .list__item {
   list-style: none;
   display: flex;
+  gap: 8px;
 }
 
 .list__item:hover .nav__button--delete {
