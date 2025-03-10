@@ -67,14 +67,22 @@ function createMainPage(projectId, isTimed) {
 
     const moreTodoDetails = document.createElement("div")
     moreTodoDetails.classList.add("todo-list__details")
+
+    const todoProjectTitle = document.createElement("p")
+    todoProjectTitle.textContent = `Project: ${todo.projectTitle}`
+
     const todoDesc = document.createElement("p")
     todoDesc.classList.add("todo-list__desc")
     todoDesc.textContent = todo.description
+
     const todoPrio = document.createElement("p")
     todoPrio.textContent = `${todo.priority} Priority`
     moreTodoDetails.append(todoDesc, todoPrio)
 
     todoContent.append(todoStatus, textContainer)
+    if (isTimed) {
+      todoContent.appendChild(todoProjectTitle)
+    }
 
     const buttonsContainer = document.createElement("div")
     buttonsContainer.classList.add("todo-list__buttons")
