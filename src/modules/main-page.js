@@ -1,5 +1,6 @@
 import { getProjects, getProject, setCurrentProject } from "./todo-list"
 import { showNewTodoModal, editTodoModal } from "./modals"
+import { format } from "date-fns"
 
 const main = document.querySelector(".main")
 
@@ -61,7 +62,7 @@ function createMainPage(projectId, isTimed) {
 
     const dueDateElement = document.createElement("p")
     dueDateElement.classList.add("todo-list__due")
-    dueDateElement.textContent = todo.dueDate
+    dueDateElement.textContent = format(todo.dueDate, "MMM d, yyyy")
 
     textContainer.append(titleElement, dueDateElement)
 
