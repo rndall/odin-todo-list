@@ -55,9 +55,10 @@ const mapTimedProjects = () => {
       })
     )
     weekProjs.push(
-      ...project.todos.filter(
-        (todo) => getDayDiff(today, new Date(todo.dueDate)) <= 7
-      )
+      ...project.todos.filter((todo) => {
+        const dayDiff = getDayDiff(today, new Date(todo.dueDate)) + 1
+        return dayDiff >= 0 && dayDiff < 7
+      })
     )
   })
   timedProjects[0].todos = todayProjs
